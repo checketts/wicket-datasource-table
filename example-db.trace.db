@@ -1,0 +1,6 @@
+08-07 22:12:14 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "TEST" not found; SQL statement:
+select * from test [42102-158]
+08-07 22:12:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "TEST" not found; SQL statement:
+select * from test [42102-158]
