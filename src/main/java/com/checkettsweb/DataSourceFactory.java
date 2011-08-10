@@ -6,11 +6,6 @@ import org.h2.jdbcx.JdbcDataSource;
 
 public class DataSourceFactory {
 
-	public static DataSource createDataSource(){
 
-		
-		
-		return ds;
-	}
 	
 }

@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.apache.wicket.Application;
+import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.h2.jdbcx.JdbcDataSource;
 import org.slf4j.Logger;
@@ -30,15 +32,21 @@ public class WicketApplication extends WebApplication {
 
 	@Override
 	protected void init() {
-		ds = getDataSource();
+		ds = createDataSource();
 		super.init();
 	}
 
-	private JdbcDataSource getDataSource() {
+	public DataSource getDataSource() {
+		return ds;
+	}
+	
+	private JdbcDataSource createDataSource() {
 		JdbcDataSource ds = new JdbcDataSource();
 		ds.setURL("jdbc:h2:example-db");
 		ds.setUser("sa");
 		ds.setPassword("");
+		
+		this.ds = ds;
 		
 		Connection conn;
 		
@@ -69,7 +77,15 @@ public class WicketApplication extends WebApplication {
 			}
 			
 			if(rowCount == 0){
-//				conn.prepareStatement("insert into ")
+				PreparedStatement insertStatement = conn.prepareStatement("insert into example values(?,?) ");
+				insertStatement.setInt(1, 1);
+				insertStatement.setString(2, "John");
+				insertStatement.execute();
+				
+				insertStatement.setInt(1, 2);
+				insertStatement.setString(2, "Smith");
+				insertStatement.execute();
+				
 			}
 			
 		} catch (SQLException e) {
@@ -94,6 +110,20 @@ public class WicketApplication extends WebApplication {
 	 */
 	public Class<HomePage> getHomePage() {
 		return HomePage.class;
+	}
+	
+	public static WicketApplication get()
+	{
+		Application application = Application.get();
+
+		if (application instanceof WicketApplication == false)
+		{
+			throw new WicketRuntimeException(
+				"The application attached to the current thread is not a " +
+						WicketApplication.class.getSimpleName());
+		}
+
+		return (WicketApplication)application;
 	}
 
 }

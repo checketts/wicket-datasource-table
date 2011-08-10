@@ -45,7 +45,7 @@ public class ResultSetDataProvider extends SortableDataProvider<List<? extends S
 				Connection conn = null;
 				ResultSet rs = null;
 				try {
-					conn = DataSourceFactory.createDataSource().getConnection();
+					conn = WicketApplication.get().getDataSource().getConnection();
 					System.out.println("Q:"+query);
 					PreparedStatement ps = conn.prepareStatement(query);
 					rs = ps.executeQuery();

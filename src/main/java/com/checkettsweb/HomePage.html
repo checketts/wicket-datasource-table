@@ -5,5 +5,22 @@
 </head>
 <body>
 	<table wicket:id="rsTable"></table>
+	
+	<br /><br />
+	
+	<form wicket:id="form">
+		<label>Query:<input wicket:id="queryField" /></label> <input type="submit" value="execute" />
+	</form>
+	
+	<br /><br />
+	
+	<form wicket:id="ddlForm">
+		<label>DDL:<input wicket:id="ddlField" /></label> <input type="submit" value="execute" />
+	</form>
+	
+	<div>Sample Queries:</div>
+	<div>ALTER TABLE EXAMPLE ADD CREATEDATE TIMESTAMP</div>
+	<div>insert into EXAMPLE values(3,'Joe')</div>
+	
 </body>
 </html>

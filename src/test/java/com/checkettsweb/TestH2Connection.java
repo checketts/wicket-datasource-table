@@ -14,7 +14,7 @@ public class TestH2Connection {
 	@Test
 	public void simpleConnectionTest() throws ClassNotFoundException, SQLException{
 		
-		Connection conn = DataSourceFactory.createDataSource().getConnection();
+		Connection conn = WicketApplication.get().getDataSource().getConnection();
 		
 		PreparedStatement ps = conn.prepareStatement("select * from test");
 		ResultSet rs = ps.executeQuery();
@@ -40,7 +40,7 @@ public class TestH2Connection {
 		Connection conn = null;
 		ResultSet rs = null;
 		try {
-			conn = DataSourceFactory.createDataSource().getConnection();
+			conn = WicketApplication.get().getDataSource().getConnection();
 			PreparedStatement ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 			
